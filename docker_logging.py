@@ -10,8 +10,8 @@ container_name = "dudevpn_bot"
 def get_container_logs():
     try:
         container = client.containers.get(container_name)
-        logs = container.logs(tail=100)  # Получаем последние 100 строк логов
-        return logs.decode("utf-8")
+        for line in container.logs(stream=True):
+            yield line.decode('utf-8')
 
     except Exception as e:
         return f'Ошибка при получении логов: {e}'
