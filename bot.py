@@ -37,16 +37,16 @@ async def periodic_log_sender():
         try:
             logs = get_container_logs()
             if logs:
-                await bot.send_message(chat_id=int(config('CHAT_ID')), text=logs)
+                await bot.send_message(chat_id=int(config('CHAT_ID')), text=f'Логи:\n {logs}')
             await asyncio.sleep(60)  # Интервал в секундах
         except Exception as e:
             return f'Ошибка при периодической отправке логов: {e}'
 
 
 async def main():
-    task = asyncio.create_task(periodic_log_sender())
+    asyncio.create_task(periodic_log_sender())
     await dp.start_polling(bot)
-    await asyncio.gather(task)
+
 
 if __name__ == '__main__':
     asyncio.run(main())
