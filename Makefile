@@ -1,7 +1,7 @@
 build:
 	docker build -t logger_image .
 run:
-	docker run -it -d --network my_network --env-file .env --restart=unless-stopped --name logger_dudevpn logger_image
+	docker run -it -d --network my_network -v /var/run/docker.sock:/var/run/docker.sock --env-file .env --restart=unless-stopped --name logger_dudevpn logger_image
 stop:
 	docker stop logger_dudevpn
 attach:
