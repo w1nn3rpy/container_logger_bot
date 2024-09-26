@@ -7,7 +7,7 @@ client = docker.from_env()
 container_name = "dudevpn_bot"
 
 
-def get_container_logs():
+def stream_container_logs():
     try:
         container = client.containers.get(container_name)
         for line in container.logs(stream=True):

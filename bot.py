@@ -31,8 +31,8 @@ async def send_logs(message: Message):
 
 async def stream_logs():
     loop = asyncio.get_event_loop()
-    return await loop.run_in_executor(None, lambda: get_container_logs())
-
+    for log in await loop.run_in_executor(None, lambda: list(stream_container_logs())):
+        yield log
 
 # Периодическая отправка логов
 # async def periodic_log_sender():
