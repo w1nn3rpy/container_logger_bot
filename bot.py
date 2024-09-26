@@ -30,7 +30,12 @@ async def send_logs(message: Message):
 
 
 async def stream_logs():
-    for log in await asyncio.to_thread(stream_container_logs()):
+    loop = asyncio.get_event_loop()
+    generator = stream_container_logs()
+    while True:
+        log = await asyncio.to_thread(next, generator, None)
+        if log is None:
+            break
         yield log
 
 # Периодическая отправка логов
