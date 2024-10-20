@@ -1,5 +1,5 @@
 # Используем базовый образ Python
-FROM python:3.12
+FROM python:3.12-lite
 
 RUN apt-get update && apt-get install -y \
     libpq-dev \
