@@ -9,3 +9,8 @@ attach:
 dell:
 	docker rm logger_dudevpn
 	docker image remove logger_image
+update:
+	make stop
+	make dell
+	make build
+	make run
