@@ -25,6 +25,7 @@ async def send_logs(message: Message):
         await message.reply('Начинаю отправлять логи в реальном времени\n')
         async for log in stream_logs():
             await bot.send_message(chat_id=int(config('CHAT_ID')), text=log)
+            await asyncio.sleep(1)
     else:
         await message.reply('Ты левый чел')
 
