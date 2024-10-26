@@ -28,6 +28,19 @@ async def send_logs(message: Message):
     else:
         await message.reply('Ты левый чел')
 
+@dp.message(Command('restart'))
+async def restart_container(message: Message):
+    await message.reply('Перезапускаю контейнер')
+    container = client.containers.get(container_name)
+    container.restart()
+    await asyncio.sleep(10)
+    container.reload()
+    if container.status == 'running':
+        await message.reply('Контейнер запущен')
+    else:
+        await message.reply('Контейнер не запустился')
+
+
 
 async def stream_logs():
     loop = asyncio.get_event_loop()

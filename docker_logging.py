@@ -1,6 +1,4 @@
 import docker
-from collections import deque
-from datetime import datetime, timedelta
 
 # Подключение к Docker
 client = docker.from_env()
