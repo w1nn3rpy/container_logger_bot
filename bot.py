@@ -38,6 +38,7 @@ async def restart_container(message: Message):
     container.reload()
     if container.status == 'running':
         await message.reply('Контейнер запущен')
+        await send_logs(message)
     else:
         await message.reply('Контейнер не запустился')
 
