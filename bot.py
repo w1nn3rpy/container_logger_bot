@@ -31,16 +31,17 @@ async def send_logs(message: Message):
 
 @dp.message(Command('restart'))
 async def restart_container(message: Message):
-    await message.reply('Перезапускаю контейнер')
-    container = client.containers.get(container_name)
-    container.restart()
-    await asyncio.sleep(10)
-    container.reload()
-    if container.status == 'running':
-        await message.reply('Контейнер запущен')
-        await send_logs(message)
-    else:
-        await message.reply('Контейнер не запустился')
+    if message.from_user.id == int(config('CHAT_ID')):
+        await message.reply('Перезапускаю контейнер')
+        container = client.containers.get(container_name)
+        container.restart()
+        await asyncio.sleep(10)
+        container.reload()
+        if container.status == 'running':
+            await message.reply('Контейнер запущен')
+            await send_logs(message)
+        else:
+            await message.reply('Контейнер не запустился')
 
 
 
